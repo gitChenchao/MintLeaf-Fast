@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mintleaf.modules.core.mapper.CoreLoggerMapper">
+  <resultMap id="BaseResultMap" type="org.mintleaf.modules.core.domain.CoreLogger">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="client_ip" jdbcType="VARCHAR" property="client_ip" />
+    <result column="uri" jdbcType="VARCHAR" property="uri" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="session_id" jdbcType="VARCHAR" property="session_id" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="returm_time" jdbcType="VARCHAR" property="returm_time" />
+    <result column="http_status_code" jdbcType="VARCHAR" property="http_status_code" />
+    <result column="time_consuming" jdbcType="INTEGER" property="time_consuming" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.mintleaf.modules.core.domain.CoreLoggerWithBLOBs">
+    <result column="param_data" jdbcType="LONGVARCHAR" property="param_data" />
+    <result column="return_data" jdbcType="LONGVARCHAR" property="return_data" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, client_ip, uri, type, method, session_id, time, returm_time, http_status_code, 
+    time_consuming
+  </sql>
+  <sql id="Blob_Column_List">
+    param_data, return_data
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from core_logger
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from core_logger
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.mintleaf.modules.core.domain.CoreLoggerWithBLOBs">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into core_logger (client_ip, uri, type, 
+      method, session_id, time, 
+      returm_time, http_status_code, time_consuming, 
+      param_data, return_data)
+    values (#{client_ip,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{method,jdbcType=VARCHAR}, #{session_id,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
+      #{returm_time,jdbcType=VARCHAR}, #{http_status_code,jdbcType=VARCHAR}, #{time_consuming,jdbcType=INTEGER}, 
+      #{param_data,jdbcType=LONGVARCHAR}, #{return_data,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.mintleaf.modules.core.domain.CoreLoggerWithBLOBs">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into core_logger
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="client_ip != null">
+        client_ip,
+      </if>
+      <if test="uri != null">
+        uri,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="method != null">
+        method,
+      </if>
+      <if test="session_id != null">
+        session_id,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="returm_time != null">
+        returm_time,
+      </if>
+      <if test="http_status_code != null">
+        http_status_code,
+      </if>
+      <if test="time_consuming != null">
+        time_consuming,
+      </if>
+      <if test="param_data != null">
+        param_data,
+      </if>
+      <if test="return_data != null">
+        return_data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="client_ip != null">
+        #{client_ip,jdbcType=VARCHAR},
+      </if>
+      <if test="uri != null">
+        #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="session_id != null">
+        #{session_id,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returm_time != null">
+        #{returm_time,jdbcType=VARCHAR},
+      </if>
+      <if test="http_status_code != null">
+        #{http_status_code,jdbcType=VARCHAR},
+      </if>
+      <if test="time_consuming != null">
+        #{time_consuming,jdbcType=INTEGER},
+      </if>
+      <if test="param_data != null">
+        #{param_data,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="return_data != null">
+        #{return_data,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.mintleaf.modules.core.domain.CoreLoggerWithBLOBs">
+    update core_logger
+    <set>
+      <if test="client_ip != null">
+        client_ip = #{client_ip,jdbcType=VARCHAR},
+      </if>
+      <if test="uri != null">
+        uri = #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="session_id != null">
+        session_id = #{session_id,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returm_time != null">
+        returm_time = #{returm_time,jdbcType=VARCHAR},
+      </if>
+      <if test="http_status_code != null">
+        http_status_code = #{http_status_code,jdbcType=VARCHAR},
+      </if>
+      <if test="time_consuming != null">
+        time_consuming = #{time_consuming,jdbcType=INTEGER},
+      </if>
+      <if test="param_data != null">
+        param_data = #{param_data,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="return_data != null">
+        return_data = #{return_data,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.mintleaf.modules.core.domain.CoreLoggerWithBLOBs">
+    update core_logger
+    set client_ip = #{client_ip,jdbcType=VARCHAR},
+      uri = #{uri,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      session_id = #{session_id,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      returm_time = #{returm_time,jdbcType=VARCHAR},
+      http_status_code = #{http_status_code,jdbcType=VARCHAR},
+      time_consuming = #{time_consuming,jdbcType=INTEGER},
+      param_data = #{param_data,jdbcType=LONGVARCHAR},
+      return_data = #{return_data,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.mintleaf.modules.core.domain.CoreLogger">
+    update core_logger
+    set client_ip = #{client_ip,jdbcType=VARCHAR},
+      uri = #{uri,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      session_id = #{session_id,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      returm_time = #{returm_time,jdbcType=VARCHAR},
+      http_status_code = #{http_status_code,jdbcType=VARCHAR},
+      time_consuming = #{time_consuming,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="findAll" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from core_logger
+    order by time desc
+  </select>
+  <delete id="deleteBatch">
+    delete from core_logger
+    where 1=1
+    <if test="ids!=null and ids.size()>0">
+      <foreach collection="ids" item="ids" open="AND ("
+               separator="OR" close=")">
+        id = #{ids,jdbcType = INTEGER}
+      </foreach>
+    </if>
+  </delete>
+</mapper>

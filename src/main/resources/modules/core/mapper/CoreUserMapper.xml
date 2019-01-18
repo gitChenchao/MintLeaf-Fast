@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mintleaf.modules.core.mapper.CoreUserMapper">
+  <resultMap id="BaseResultMap" type="org.mintleaf.modules.core.domain.CoreUser">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="tenantid" jdbcType="INTEGER" property="tenantid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="psw" jdbcType="VARCHAR" property="psw" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="iphone" jdbcType="VARCHAR" property="iphone" />
+    <result column="creator" jdbcType="INTEGER" property="creator" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="logintime" jdbcType="TIMESTAMP" property="logintime" />
+    <result column="updateuser" jdbcType="INTEGER" property="updateuser" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, tenantid, name, psw, email, iphone, creator, createtime, flag, logintime, updateuser,
+    updatetime, role
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from core_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from core_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.mintleaf.modules.core.domain.CoreUser">
+    insert into core_user (id, tenantid, name,
+      psw, email, iphone,
+      creator, createtime, flag,
+      logintime, updateuser, updatetime,
+      role)
+    values (#{id,jdbcType=INTEGER}, #{tenantid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+      #{psw,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{iphone,jdbcType=VARCHAR},
+      #{creator,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{flag,jdbcType=INTEGER},
+      #{logintime,jdbcType=TIMESTAMP}, #{updateuser,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP},
+      #{role,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.mintleaf.modules.core.domain.CoreUser">
+    insert into core_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tenantid != null">
+        tenantid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="psw != null">
+        psw,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="iphone != null">
+        iphone,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="logintime != null">
+        logintime,
+      </if>
+      <if test="updateuser != null">
+        updateuser,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tenantid != null">
+        #{tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="psw != null">
+        #{psw,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="iphone != null">
+        #{iphone,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="logintime != null">
+        #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuser != null">
+        #{updateuser,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.mintleaf.modules.core.domain.CoreUser">
+    update core_user
+    <set>
+      <if test="tenantid != null">
+        tenantid = #{tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="psw != null">
+        psw = #{psw,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="iphone != null">
+        iphone = #{iphone,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="logintime != null">
+        logintime = #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuser != null">
+        updateuser = #{updateuser,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="role != null">
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.mintleaf.modules.core.domain.CoreUser">
+    update core_user
+    set tenantid = #{tenantid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      psw = #{psw,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      iphone = #{iphone,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      flag = #{flag,jdbcType=INTEGER},
+      logintime = #{logintime,jdbcType=TIMESTAMP},
+      updateuser = #{updateuser,jdbcType=INTEGER},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      role = #{role,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteBatch">
+    delete from core_user
+    where 1=1
+    <if test="ids!=null and ids.size()>0">
+      <foreach collection="ids" item="ids" open="AND ("
+               separator="OR" close=")">
+        id = #{ids,jdbcType = INTEGER}
+      </foreach>
+    </if>
+  </delete>
+  <select id="findCoreUserByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from core_user
+    where name = #{name,jdbcType=VARCHAR}
+    limit 1
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from core_user
+    where 1=1
+    <if test="name != null and name !='' ">
+      and name LIKE CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+    </if>
+    order by createtime,updatetime desc
+  </select>
+</mapper>

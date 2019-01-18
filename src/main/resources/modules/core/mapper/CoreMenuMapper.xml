@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mintleaf.modules.core.mapper.CoreMenuMapper">
+  <resultMap id="BaseResultMap" type="org.mintleaf.modules.core.domain.CoreMenu">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="menutype" jdbcType="CHAR" property="menutype" />
+    <result column="display" jdbcType="INTEGER" property="display" />
+    <result column="parentid" jdbcType="INTEGER" property="parentid" />
+    <result column="creator" jdbcType="INTEGER" property="creator" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateuser" jdbcType="INTEGER" property="updateuser" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="flag" jdbcType="CHAR" property="flag" />
+    <result column="permission" jdbcType="VARCHAR" property="permission" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, url, icon, menutype, display, parentid, creator, createtime, updateuser, 
+    updatetime, flag, permission
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from core_menu
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from core_menu
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.mintleaf.modules.core.domain.CoreMenu">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into core_menu (name, url, icon, 
+      menutype, display, parentid, 
+      creator, createtime, updateuser, 
+      updatetime, flag, permission
+      )
+    values (#{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
+      #{menutype,jdbcType=CHAR}, #{display,jdbcType=INTEGER}, #{parentid,jdbcType=INTEGER}, 
+      #{creator,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updateuser,jdbcType=INTEGER}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{flag,jdbcType=CHAR}, #{permission,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.mintleaf.modules.core.domain.CoreMenu">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into core_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="menutype != null">
+        menutype,
+      </if>
+      <if test="display != null">
+        display,
+      </if>
+      <if test="parentid != null">
+        parentid,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updateuser != null">
+        updateuser,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="permission != null">
+        permission,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="menutype != null">
+        #{menutype,jdbcType=CHAR},
+      </if>
+      <if test="display != null">
+        #{display,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null">
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuser != null">
+        #{updateuser,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=CHAR},
+      </if>
+      <if test="permission != null">
+        #{permission,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.mintleaf.modules.core.domain.CoreMenu">
+    update core_menu
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="menutype != null">
+        menutype = #{menutype,jdbcType=CHAR},
+      </if>
+      <if test="display != null">
+        display = #{display,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null">
+        parentid = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuser != null">
+        updateuser = #{updateuser,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=CHAR},
+      </if>
+      <if test="permission != null">
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.mintleaf.modules.core.domain.CoreMenu">
+    update core_menu
+    set name = #{name,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      menutype = #{menutype,jdbcType=CHAR},
+      display = #{display,jdbcType=INTEGER},
+      parentid = #{parentid,jdbcType=INTEGER},
+      creator = #{creator,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updateuser = #{updateuser,jdbcType=INTEGER},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      flag = #{flag,jdbcType=CHAR},
+      permission = #{permission,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from core_menu
+    where 1=1
+    <if test="name != null and name !='' ">
+      and name LIKE CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+    </if>
+    order by createtime,updatetime  desc
+  </select>
+  <delete id="deleteBatch">
+    delete from core_menu
+    where 1=1
+    <if test="ids!=null and ids.size()>0">
+      <foreach collection="ids" item="ids" open="AND ("
+               separator="OR" close=")">
+        id = #{ids,jdbcType = INTEGER}
+      </foreach>
+    </if>
+  </delete>
+  <select id="findMenuByNameSample" resultMap="BaseResultMap">
+    SELECT DISTINCT
+      m.*
+    FROM
+      core_menu m,
+      core_user u,
+      core_role_menu rm,
+      core_user_role ur
+    WHERE
+      m.id = rm.menuid
+    AND ur.roleid = rm.roleid
+    AND ur.userid = u.id
+    AND u.name = #{name,jdbcType=VARCHAR}
+  </select>
+</mapper>

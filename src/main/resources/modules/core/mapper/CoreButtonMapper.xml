@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mintleaf.modules.core.mapper.CoreButtonMapper">
+  <resultMap id="BaseResultMap" type="org.mintleaf.modules.core.domain.CoreButton">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="menuid" jdbcType="INTEGER" property="menuid" />
+    <result column="permission" jdbcType="VARCHAR" property="permission" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, menuid, permission
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from core_button
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from core_button
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.mintleaf.modules.core.domain.CoreButton">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into core_button (name, menuid, permission
+      )
+    values (#{name,jdbcType=VARCHAR}, #{menuid,jdbcType=INTEGER}, #{permission,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.mintleaf.modules.core.domain.CoreButton">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into core_button
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="menuid != null">
+        menuid,
+      </if>
+      <if test="permission != null">
+        permission,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="menuid != null">
+        #{menuid,jdbcType=INTEGER},
+      </if>
+      <if test="permission != null">
+        #{permission,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.mintleaf.modules.core.domain.CoreButton">
+    update core_button
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="menuid != null">
+        menuid = #{menuid,jdbcType=INTEGER},
+      </if>
+      <if test="permission != null">
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.mintleaf.modules.core.domain.CoreButton">
+    update core_button
+    set name = #{name,jdbcType=VARCHAR},
+      menuid = #{menuid,jdbcType=INTEGER},
+      permission = #{permission,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteBatch">
+    delete from core_button
+    where 1=1
+    <if test="ids!=null and ids.size()>0">
+      <foreach collection="ids" item="ids" open="AND ("
+               separator="OR" close=")">
+        id = #{ids,jdbcType = INTEGER}
+      </foreach>
+    </if>
+  </delete>
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from core_button
+    order by id desc
+  </select>
+  <select id="findButtonByRoleSample" resultMap="BaseResultMap">
+      SELECT DISTINCT
+        b.*
+      FROM
+        core_role r,
+        core_button b,
+        core_role_button rb
+      WHERE
+      rb.buttonid=b.id
+      AND
+      rb.roleid=r.id
+      AND
+      r.name=#{name,jdbcType=VARCHAR}
+  </select>
+</mapper>
